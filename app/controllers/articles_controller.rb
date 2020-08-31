@@ -12,16 +12,28 @@ class ArticlesController < ApplicationController
 	@article = Article.new # needed to avoid  error displaying messages on initial screen load
   end
  
+  def edit
+    @article = Article.find(params[:id])
+  end
+  
   def create
     @article = Article.new(params.require(:article).permit(:title, :description))
-    #@article.save
-    #redirect_to article_path(@article)
-	if @article.save
+    if @article.save
       flash[:notice] = "The article has been created successfully."
       redirect_to article_path(@article)
     else
       render 'new'
     end
   end  
+  
+  def update
+    @article = Article.find(params[:id])
+    if @article.update(params.require(:article).permit(:title, :description))
+      flash[:notice] = "The article has been updated successfully."
+      redirect_to article_path(@article)
+    else
+      render 'edit'
+    end
+  end
 
 end
