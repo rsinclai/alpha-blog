@@ -39,3 +39,9 @@
 /yarn-error.log
 yarn-debug.log*
 .yarn-integrity
+
+# Files which need to be different in production:
+Gemfile.lock
+config/credentials.yml.enc
+config/database.yml
+
